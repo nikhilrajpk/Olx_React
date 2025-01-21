@@ -1,0 +1,10 @@
+.footer{
+    object-fit: contain;
+    background-color: gray;
+}
+.img_footer{
+    object-fit: contain;
+    width: 100%;
+    background-position: center;
+    background-size: contain;
+}

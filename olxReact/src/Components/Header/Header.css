@@ -1,0 +1,90 @@
+.nav{
+    width: 100%;
+    height: 4rem;
+    border-bottom: .5px solid #111;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: white;
+}
+.logo{
+    object-fit: contain;
+    width: 3rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+}
+.search_bar{
+    height: 2rem;
+    width: 40%;
+    border: 1px solid #111;
+    border-radius: 3px;
+    text-align: center;
+    color: #111;
+    outline: none;
+}
+.top_right{
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+    gap: 3px;
+}
+.login_btn{
+    color: #111;
+    font-size: medium;
+    font-weight: 700;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid #111;
+    padding: 2px;
+    cursor: pointer;
+}
+.login_btn:hover{
+    border-bottom: 2px solid blue;    
+}
+.sell{
+    color: #111;
+    font-size: medium;
+    font-weight: 700;
+    background-color: transparent;
+    border: 3px solid #0808c1;
+    border-radius: 15px;
+    padding: 4px;
+    cursor: pointer;
+}
+.sell:hover{
+    border: 3px solid gray;
+}
+.profile{
+    width: 7px;
+    position: relative;
+}
+.profile_btn{
+    width: 30px;
+    height: 30px;
+    border: 1px solid blue;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+
+}
+.profile_details{
+    width: 6rem;
+    height: 7rem;
+    border: 1px solid #111;
+    border-radius: 2px;
+    color: #111;
+    background-color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: absolute;
+    top: 3rem;
+    line-height: 1.7rem;
+    padding: 7px;
+    display: none;
+}
+.profile_details_show{
+    display: block;
+}

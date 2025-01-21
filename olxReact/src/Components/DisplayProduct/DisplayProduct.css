@@ -1,0 +1,15 @@
+.display_products_div{
+    padding: 2rem;
+    padding-left: 4rem;
+    /* background-color: aquamarine; */
+}
+.display_products_card_div{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2px;
+    gap: 2rem;
+}
+h2{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 5px;
+}

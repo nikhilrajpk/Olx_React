@@ -1,0 +1,58 @@
+.sell_page{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sell_div{
+    width: 40%;
+    height: 80%;
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    border-radius: 2rem;
+}
+.sell_logo{
+    width: 100%;
+    height: 50%;
+}
+.sell_img{
+    margin-left: 8rem;
+    object-fit: contain;
+    width: 15rem;
+    background-size: contain;
+}
+.sell_form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.sell_field{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid blue;
+    color: black;
+}
+.sell_field:hover{
+    border-bottom: 1px solid gray;
+}
+.sell_button{
+    color: #111;
+    font-size: medium;
+    font-weight: 700;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid #111;
+    padding: 2px;
+    cursor: pointer;
+}
+.sell_button:hover{
+    border-bottom: 2px solid blue;    
+}
+.sell_upload_img{
+    background-color: transparent;
+    border-bottom: 1px solid blue;
+}

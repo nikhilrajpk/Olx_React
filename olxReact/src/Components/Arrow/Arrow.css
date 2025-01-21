@@ -1,0 +1,16 @@
+
+.left_arrow_div{
+    position: fixed;
+    top: 4rem;
+    left: 1rem;
+    width: 100%;
+}
+.left_arrow{
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+span{
+    font-size: 2rem;
+    color: blue;
+}
