@@ -13,3 +13,4 @@ class Products(models.Model):
     category = models.CharField(max_length=20)
     description = models.TextField(max_length=200)
     product_image = models.ImageField(upload_to='product_image')
+    created_at = models.DateTimeField(auto_now_add=True)

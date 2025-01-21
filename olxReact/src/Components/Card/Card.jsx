@@ -3,21 +3,21 @@ import cardImg from '../../assets/luffy.jpg'
 import './Card.css'
 import { Link } from 'react-router-dom'
 
-function Card() {
+function Card({prdct}) {
   return (
     < Link to={'/product-detail'} className='card_link'>
       <div className='outer_card'>
           <div className="img_div">
-              <img src={cardImg} alt="" className='product_img' />
+              <img src={prdct?.product_image.url} alt={prdct?.product_name} className='product_img' />
               <div className='favorite'>🤍</div>
           </div>
           <div className="product_details">
-              <h2>₹ 12400</h2>
-              <p>Monkey d luffy</p>
-              <p>One piece</p>
+              <h2>₹ {prdct?.price}</h2>
+              <p>{prdct?.product_name}</p>
+              <p>{prdct?.category}</p>
               <div className="bottom_proudct_detail">
-                  <p>Kanhangad</p>
-                  <p>10-11-23</p>
+                  <p>{prdct?.user?.address}</p>
+                  <p>{prdct?.created_at}</p>
               </div>
           </div>
       </div>
@@ -25,4 +25,4 @@ function Card() {
   )
 }
 
-export default Card
+export default React.memo(Card)

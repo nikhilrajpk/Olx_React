@@ -1,6 +1,7 @@
 .display_products_div{
     padding: 2rem;
     padding-left: 4rem;
+    min-height: 50vh;
     /* background-color: aquamarine; */
 }
 .display_products_card_div{

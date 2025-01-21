@@ -3,8 +3,9 @@ import { useContext, createContext } from "react";
 
 export const UserContext = createContext({
     user : {},
-    isLogged : false,
     handleUser : ()=>{},
+    isLogged : false,
+    handleIsLogged : ()=>{},
 })
 
 

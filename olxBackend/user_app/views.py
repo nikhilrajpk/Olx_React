@@ -38,11 +38,13 @@ class LoginView(APIView):
         password = request.data.get('password')
         user = authenticate(username=username, password=password)
         if user:
+            userDetails = get_user_model().objects.get(username=user.username)
             refresh = RefreshToken.for_user(user)
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
-                'user': UserSerializer(user).data
+                'user': UserSerializer(user).data,
+                'userDetails': userDetails,
             })
         return Response({'error': 'Invalid Credentials'}, status=401)
 
