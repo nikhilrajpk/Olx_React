@@ -6,16 +6,14 @@ import { Link } from 'react-router-dom'
 function Header() {
     const {isLogged} = useUser()
 
-    const [show, setShow] = useState(false)
-    const showProfile = ()=>{
-        setShow((prev) => !prev)
-    }
     
 
   return (
     <header className='nav'>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWvz4SoS1_MDfmm-HevR3Wgx2er-ZQNaKm_aGkYHdOgkLKJQXj2j0BlV4&s"
+        <Link to={'/'}>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWvz4SoS1_MDfmm-HevR3Wgx2er-ZQNaKm_aGkYHdOgkLKJQXj2j0BlV4&s"
              alt="olx logo" className="logo" />
+        </Link>
 
         <input type="text"
          className="search_bar"
@@ -23,15 +21,11 @@ function Header() {
          />
 
          {
-            isLogged ? (
+            !isLogged ? (
             <div className='profile'>
-                <button onClick={showProfile} className='profile_btn'>👤</button>
-                <div className={`profile_details ${show && 'profile_details_show'}`}>
-                    <h3>username</h3>
-                    <h3>name</h3>
-                    <h3>email</h3>
-                    <h3>phone</h3>
-                </div>
+                < Link to={'/user-profile'} >
+                    <button className='profile_btn'>👤</button>
+                </Link>
             </div>
             ) : ''
          }

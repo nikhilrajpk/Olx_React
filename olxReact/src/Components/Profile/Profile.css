@@ -1,0 +1,23 @@
+.profile_full_div{
+    background-color: antiquewhite;
+    padding: 2rem;
+}
+.user_details{
+    background-color: rgb(238, 241, 243);
+    border: 1px solid blue;
+    border-radius: 10px;
+    padding: 15px;
+    padding-left: 70px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    line-height: 1.9rem;
+    width: 30rem;
+    margin: auto;
+}
+.profile_product_div{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+    padding-top: .8rem;
+    width: 72rem;
+}

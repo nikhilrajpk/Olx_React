@@ -4,23 +4,23 @@
     background-color: rgb(238, 241, 243);
     height: 80vh;
     display: flex;
-    gap: 5%;
+    gap: 6rem;
 }
-.img_div{
-    width: 60%;
-    height: 80%;
+.image_div{
+    width: 45rem;
+    height: 25rem;
     object-fit: contain;
     /* background-color: blue; */
 }
 .img{
-    width: 100%;
+    width: 40rem;
     object-fit: contain;
     background-repeat: no-repeat;
     border-radius: 5px;
 }
 .details_div{
-    width: 30%;
-    height: 70%;
+    width: 25rem;
+    height: 21rem;
     padding: 2rem;
     border: 1px solid black;
     border-radius: 5px;

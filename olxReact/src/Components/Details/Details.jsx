@@ -5,7 +5,7 @@ import './Details.css'
 function Details() {
   return (
     <div className='product_detail_div'>
-        <div className="img_div">
+        <div className="image_div">
             <img src={cardImg} alt="" className='img' />
         </div>
         <div className="details_div">

@@ -41,6 +41,7 @@
     border-bottom: 2px solid #111;
     padding: 2px;
     cursor: pointer;
+    transition-duration: .3s;
 }
 .login_btn:hover{
     border-bottom: 2px solid blue;    
@@ -54,6 +55,7 @@
     border-radius: 15px;
     padding: 4px;
     cursor: pointer;
+    transition-duration: .3s;
 }
 .sell:hover{
     border: 3px solid gray;
@@ -71,7 +73,7 @@
     cursor: pointer;
 
 }
-.profile_details{
+/* .profile_details{
     width: 6rem;
     height: 7rem;
     border: 1px solid #111;
@@ -87,4 +89,4 @@
 }
 .profile_details_show{
     display: block;
-}
+} */

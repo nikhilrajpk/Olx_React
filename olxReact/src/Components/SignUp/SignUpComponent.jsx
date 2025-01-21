@@ -14,6 +14,7 @@ function SignUpComponent() {
                 <input type="text" placeholder='Username' className="signup_field" required />
                 <input type="email" placeholder='Email' className="signup_field" required />
                 <input type="text" placeholder='Phone' className="signup_field" required />
+                <input type="text" placeholder='Address' className="signup_field" required />
                 <input type="password" placeholder='Password' className="signup_field" required />
                 <button className='signup_button'>Register</button>
             </form>

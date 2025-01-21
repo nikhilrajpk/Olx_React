@@ -1,11 +1,11 @@
-.signup_page{
+.edit_page{
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.signup_div{
+.edit_div{
     width: 40%;
     height: 80%;
     border: 1px solid blue;
@@ -15,31 +15,31 @@
     padding: 1rem;
     border-radius: 2rem;
 }
-.signup_logo{
+.edit_logo{
     width: 100%;
     height: 50%;
 }
-.signup_img{
+.edit_img{
     margin-left: 8rem;
     object-fit: contain;
     width: 15rem;
     background-size: contain;
 }
-.signup_form{
+.edit_form{
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-.signup_field{
+.edit_field{
     outline: none;
     border: none;
     border-bottom: 1px solid blue;
     color: black;
 }
-.signup_field:hover{
+.edit_field:hover{
     border-bottom: 1px solid gray;
 }
-.signup_button{
+.edit_button{
     color: #111;
     font-size: medium;
     font-weight: 700;
@@ -49,6 +49,10 @@
     padding: 2px;
     cursor: pointer;
 }
-.signup_button:hover{
+.edit_button:hover{
     border-bottom: 2px solid blue;    
+}
+.edit_upload_img{
+    background-color: transparent;
+    border-bottom: 1px solid blue;
 }

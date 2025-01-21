@@ -1,0 +1,25 @@
+.user_product_div{
+    height: 23rem;
+    width: 16rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.user_product_btn{
+    color: #111;
+    font-size: medium;
+    font-weight: 700;
+    background-color: transparent;
+    border: 3px solid #0808c1;
+    border-radius: 15px;
+    padding: 4px;
+    cursor: pointer;
+    transition-duration: .3s;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
+}
+.user_product_btn:hover{
+    border: 3px solid gray;
+}
