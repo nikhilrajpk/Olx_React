@@ -21,6 +21,7 @@ function App() {
         email : '',
         phone : '',
         address : '',
+        id : '',
     }
   }
   )
@@ -41,8 +42,8 @@ function App() {
   }, [isLogged, user]);
 
   const handleUser = (userDetails) => {
-    const { username, email, phone, address } = userDetails;
-    setUser({ username, email, phone, address });
+    const { username, email, phone, address, id } = userDetails;
+    setUser({ username, email, phone, address, id });
     setIsLogged(true);
   };
   

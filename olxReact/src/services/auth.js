@@ -18,6 +18,7 @@ export const loginUser = async (credentials) => {
         'Content-Type': 'application/json',
       },
     });
+    console.log('Stored token:', localStorage.getItem('access'));
     return response.data;
  
 };

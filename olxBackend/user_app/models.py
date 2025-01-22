@@ -11,6 +11,6 @@ class Products(models.Model):
     product_name = models.CharField(max_length=100)
     price = models.CharField(max_length=10)
     category = models.CharField(max_length=20)
-    description = models.TextField(max_length=200)
+    description = models.CharField(max_length=200)
     product_image = models.ImageField(upload_to='product_image')
     created_at = models.DateTimeField(auto_now_add=True)
