@@ -2,11 +2,16 @@ import React, { useState } from 'react'
 import './Header.css'
 import useUser from '../../Contexts/UserContext'
 import { Link } from 'react-router-dom'
+import {logoutUser} from '../../services/auth'
 
 function Header() {
-    const {isLogged} = useUser()
+    const {isLogged, handleIsLogged} = useUser()
 
-    
+    const handleLogout = () =>{
+        logoutUser();
+        handleIsLogged()
+        alert('Logged out!');
+    }
 
   return (
     <header className='nav'>
@@ -21,7 +26,7 @@ function Header() {
          />
 
          {
-            !isLogged ? (
+            isLogged ? (
             <div className='profile'>
                 < Link to={'/user-profile'} >
                     <button className='profile_btn'>👤</button>
@@ -34,7 +39,7 @@ function Header() {
             {
                 isLogged ? (
                     <Link>
-                        <button className="login_btn">
+                        <button onClick={handleLogout} className="login_btn">
                             Logout
                         </button>
                     </Link>
@@ -53,11 +58,17 @@ function Header() {
                     </>
                 )
             }
-            <Link to={'/sell-product'}>
-                <button className='sell'>
-                    +SELL
-                </button>
-            </Link>
+            {
+                isLogged ? (
+                    <Link to={'/sell-product'}>
+                        <button className='sell'>
+                            +SELL
+                        </button>
+                    </Link>
+                ) : (
+                    <div>   </div>
+                )
+            }
         </div>
     </header>
   )

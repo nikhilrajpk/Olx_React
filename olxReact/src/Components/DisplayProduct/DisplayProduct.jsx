@@ -10,9 +10,14 @@ function DisplayProduct() {
 
   useEffect(()=>{
     const getProducts = async () =>{
-      const data = await fetchProducts();
-      console.log(data)
-      handleProducts(data)
+      try{
+        const data = await fetchProducts();
+        console.log(data)
+        handleProducts(data)
+      }catch(error){
+        console.error('Error loading products:', error);
+        alert('Failed to fetch products. Please log in again.');
+      }
     };
     getProducts()
   }, []);

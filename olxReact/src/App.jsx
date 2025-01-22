@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { UserProvider } from './Contexts/UserContext'
@@ -14,39 +14,67 @@ import Loader from './utils/Loader/Loader'
 
 function App() {
   // userContext
-  const [user, setUser] = useState({
-    username : '',
-    email : '',
-    phone : '',
-    address : '',
-  })
-  const handleUser = (e)=>{
-    const {username, email, phone, address} = e
-    setUser({
-      ...user, username : username, email : email,
-      phone : phone, address : address
-    })
-    setIsLogged(true)
+  const [user, setUser] = useState(()=>{
+    const loggedUser = localStorage.getItem('loggedUser')
+    return loggedUser ? JSON.parse(loggedUser) : {
+        username : '',
+        email : '',
+        phone : '',
+        address : '',
+    }
   }
+  )
+
+  const [isLogged, setIsLogged] = useState(() => {
+    const loggedUser = localStorage.getItem('loggedUser');
+    return loggedUser ? true : false;
+  });
+
+  console.log(user)
+
+  useEffect(() => {
+    if (isLogged) {
+      localStorage.setItem('loggedUser', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('loggedUser');
+    }
+  }, [isLogged, user]);
+
+  const handleUser = (userDetails) => {
+    const { username, email, phone, address } = userDetails;
+    setUser({ username, email, phone, address });
+    setIsLogged(true);
+  };
   
-  const [isLogged, setIsLogged] = useState(false)
+
   const handleIsLogged = ()=>{
-    setIsLogged(false)
+    setUser({
+      username: '',
+      email: '',
+      phone: '',
+      address: '',
+    });
+    setIsLogged(false);
+    localStorage.removeItem('loggedUser');
+    alert('Successfully logged out');
   }
 
   // productContext
   const [products, setProducts] = useState([]);
+
   const handleProducts = (data)=>{
     setProducts(data)
   };
+
   const [singleProduct, setSingleProduct] = useState('')
+  
   const handleSingleProduct = (prod)=>{
     setSingleProduct(prod)
   }
 
   return (
-    < UserProvider value={user, isLogged, handleUser, handleIsLogged} >
-      < ProductProvider value={products, handleProducts, singleProduct, handleSingleProduct} >
+    < UserProvider value={{user, isLogged, handleUser, handleIsLogged}} >
+      < ProductProvider value={{products, handleProducts, singleProduct, handleSingleProduct}} >
         <Router >
           < Suspense fallback={ <Loader /> }>
             <Routes>

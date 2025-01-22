@@ -3,8 +3,11 @@ import './LoginComponent.css'
 import Arrow from '../Arrow/Arrow'
 import {loginUser} from '../../services/auth'
 import useUser from '../../Contexts/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 function LoginComponent() {
+  const navigate = useNavigate()
+
   const {handleUser} = useUser()
 
   const [credentials, setCredentials] = useState({
@@ -22,14 +25,25 @@ function LoginComponent() {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try{
-      const data = await loginUser(credentials)
-      localStorage.setItem('access', data.access)
-      localStorage.setItem('refresh', data.refresh)
-      console.log(data.userDetails)
-      handleUser(data.userDetails)
-      alert('Login successful')
+      console.log('credentials', credentials.username, credentials.password)
+      // const data = await loginUser(credentials)
+      const data = await loginUser({
+        username : credentials.username,
+        password : credentials.password,
+      })
+      if (data.access && data.refresh) {
+        localStorage.setItem('access', data.access);
+        localStorage.setItem('refresh', data.refresh);
+        console.log('User details:', data.userDetails); // Log user details
+        handleUser(data.userDetails);
+        alert('Login successful');
+        navigate('/');
+      } else {
+        throw new Error('Tokens missing in response');
+      }
     }catch(error){
-      alert('Invalid credentials', error.message)
+      console.log('Login error:', error.response?.data || error.message);
+      alert(error.response?.data?.error || 'Invalid credentials');
     }
   };
 
