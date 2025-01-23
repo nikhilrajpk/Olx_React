@@ -22,3 +22,9 @@
     padding-top: .8rem;
     width: 72rem;
 }
+.no_products_yet{
+    object-fit: contain;
+    width: 20rem;
+    margin: auto;
+    border-radius: 10px;
+}
