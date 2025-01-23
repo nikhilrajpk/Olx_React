@@ -5,6 +5,10 @@ export const ProductContext = createContext({
     handleProducts : ()=>{},
     singleProduct : '',
     handleSingleProduct : ()=>{},
+    filteredProducts : [],
+    handleFilteredProducts : ()=>{},
+    searchTerm : '',
+    handleSearchTerm : ()=>{},
 });
 
 

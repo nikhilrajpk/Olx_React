@@ -84,9 +84,23 @@ function App() {
     setSingleProduct(prod)
   }
 
+  // filterd products
+  // const [filteredProducts, setFilteredProducts] = useState(products)
+
+  // const handleFilteredProducts = (filter_products)=>{
+  //   setFilteredProducts(filter_products)
+  // }
+
+  // search term
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const handleSearchTerm = (searchText)=>{
+    setSearchTerm(searchText)
+  }
+
   return (
     < UserProvider value={{user, isLogged, handleUser, handleIsLogged}} >
-      < ProductProvider value={{products, handleProducts, singleProduct, handleSingleProduct}} >
+      < ProductProvider value={{products, handleProducts, singleProduct, handleSingleProduct, searchTerm, handleSearchTerm }} >
         <Router >
           < Suspense fallback={ <Loader /> }>
             <Routes>

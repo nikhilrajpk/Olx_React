@@ -3,9 +3,17 @@ import './Header.css'
 import useUser from '../../Contexts/UserContext'
 import { Link } from 'react-router-dom'
 import {logoutUser} from '../../services/auth'
+import useProduct from '../../Contexts/ProductContext'
 
 function Header() {
     const {isLogged, handleIsLogged} = useUser()
+
+    const {searchTerm, handleSearchTerm} = useProduct()
+
+
+    const handleSearchChange = (searchText)=>{
+        handleSearchTerm(searchText)
+    }
 
     const handleLogout = () =>{
         logoutUser();
@@ -23,6 +31,8 @@ function Header() {
         <input type="text"
          className="search_bar"
          placeholder='Search'
+         value={searchTerm}
+         onChange={(e)=>handleSearchChange(e.target.value)}
          />
 
          {
