@@ -4,10 +4,13 @@ import './SellProduct.css'
 import {addProduct} from '../../services/products'
 import useUser from '../../Contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
+import Loader from '../../utils/Loader/Loader'
 
 function SellProduct() {
   const [isError, setIsError] = useState(false)
   const [errors, setErrors] = useState('')
+
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -86,6 +89,7 @@ function SellProduct() {
     console.log("Auth header:", `Bearer ${localStorage.getItem('access')}`);
     
     try{
+      setLoading(true)
       const response = await addProduct(formData)
       console.log('product added successfully', response)
       setIsError(false)
@@ -99,31 +103,36 @@ function SellProduct() {
       console.error('Error during registration:', errorMessage);
       setErrors(errorMessage); 
       setIsError(true); 
+    }finally{
+      setLoading(false)
     }
   };
 
   return (
     <div className='sell_page'>
       <Arrow />
+      {loading ? < Loader /> : (
         <div className="sell_div">
-            <div className="sell_logo">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWvz4SoS1_MDfmm-HevR3Wgx2er-ZQNaKm_aGkYHdOgkLKJQXj2j0BlV4&s"
-                alt="olx logo" className="sell_img" />
-            </div>
-            {
-              isError && <div className='error_box'>{errors}</div>
-            }
-            <form onSubmit={handleSubmit} className='sell_form' encType='multipart/form-data'>
-                <input onChange={handleChange} name='product_name' type="text" placeholder='Product Name' className="sell_field" required />
-                <input onChange={handleChange} name='price' type="text" placeholder='Price' className="sell_field" required />
-                <input onChange={handleChange} name='category' type="text" placeholder='Category' className="sell_field" required />
-                <input onChange={handleChange} name='description' type="text" placeholder='Description' className="sell_field" required />
-                <input onChange={handleImageChange} name='product_image' type="file" placeholder='Image' accept='.png, .jpg, .jpeg' className="sell_upload_img" required />
-                {
-                  !isError && <button type='submit' className='sell_button'>Sell</button>
-                }
-            </form>
+          <div className="sell_logo">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWvz4SoS1_MDfmm-HevR3Wgx2er-ZQNaKm_aGkYHdOgkLKJQXj2j0BlV4&s"
+              alt="olx logo" className="sell_img" />
+          </div>
+          {
+            isError && <div className='error_box'>{errors}</div>
+          }
+          <form onSubmit={handleSubmit} className='sell_form' encType='multipart/form-data'>
+              <input onChange={handleChange} name='product_name' type="text" placeholder='Product Name' className="sell_field" required />
+              <input onChange={handleChange} name='price' type="text" placeholder='Price' className="sell_field" required />
+              <input onChange={handleChange} name='category' type="text" placeholder='Category' className="sell_field" required />
+              <input onChange={handleChange} name='description' type="text" placeholder='Description' className="sell_field" required />
+              <input onChange={handleImageChange} name='product_image' type="file" placeholder='Image' accept='.png, .jpg, .jpeg' className="sell_upload_img" required />
+              {
+                !isError && <button type='submit' className='sell_button'>Sell</button>
+              }
+          </form>
         </div>
+      )
+    }
     </div>
   )
 }

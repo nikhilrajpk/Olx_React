@@ -4,10 +4,13 @@ import Arrow from '../Arrow/Arrow'
 import {loginUser} from '../../services/auth'
 import useUser from '../../Contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
+import Loader from '../../utils/Loader/Loader'
 
 function LoginComponent() {
   const [isError, setIsError] = useState(false)
   const [errors, setErrors] = useState('')
+
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -28,16 +31,20 @@ function LoginComponent() {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try{
+      setLoading(true)
       console.log('credentials', credentials.username, credentials.password)
+
       // const data = await loginUser(credentials)
       const data = await loginUser({
         username : credentials.username,
         password : credentials.password,
       })
+
       if (data.access && data.refresh) {
         localStorage.setItem('access', data.access);
         localStorage.setItem('refresh', data.refresh);
-        console.log('User details:', data.userDetails); // Log user details
+        console.log('User details:', data.userDetails); 
+
         handleUser(data.userDetails);
         setIsError(false)
         alert('Login successful');
@@ -54,13 +61,17 @@ function LoginComponent() {
       console.error('Error during registration:', errorMessage);
       setErrors(errorMessage + ' ' + 'Username or password is incorrect!'); 
       setIsError(true); 
+    }finally{
+      setLoading(false)
     }
   };
 
   return (
     <div className='login_page'>
       < Arrow />
-        <div className="login_div">
+      {
+        loading ? < Loader /> : (
+          <div className="login_div">
             <div className="login_logo">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWvz4SoS1_MDfmm-HevR3Wgx2er-ZQNaKm_aGkYHdOgkLKJQXj2j0BlV4&s"
                 alt="olx logo" className="login_img" />
@@ -75,7 +86,9 @@ function LoginComponent() {
           
                 <button className='login_button'>Login</button>
             </form>
-        </div>
+          </div>
+        )
+      }
     </div>
   )
 }

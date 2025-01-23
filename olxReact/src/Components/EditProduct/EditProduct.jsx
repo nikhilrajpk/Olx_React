@@ -6,6 +6,9 @@ import {updateProduct} from '../../services/products'
 import Loader from '../../utils/Loader/Loader'
 
 function EditProduct() {
+  const [isError, setIsError] = useState(false)
+  const [errors, setErrors] = useState('')
+
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const edit_product_detail = JSON.parse(localStorage.getItem('edit_product'))
@@ -18,8 +21,30 @@ function EditProduct() {
     product_image: null
   });
 
+  const validateInput = (name, value) => {
+    if (name === 'product_name' && value.trim() === '') return 'Enter product name';
+    if (name === 'price' && value.trim() === '') return 'Enter price';
+    if (
+      name === 'price' &&
+      Number(value) < 0
+    )
+      return 'Enter a valid price';
+    if (name === 'category' && value.trim() === '') return 'Enter category';
+    if (name === 'description' && value.trim() === '') return 'Enter description';
+    return '';
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    const errorMessage = validateInput(name, value);
+    if (errorMessage) {
+      setErrors(errorMessage);
+      setIsError(true);
+    } else {
+      setIsError(false);
+    }
+
     setProduct(prevProduct => ({
       ...prevProduct,
       [name]: value
@@ -51,9 +76,17 @@ function EditProduct() {
       setLoading(true)
       const response = await updateProduct(edit_product_detail.id, formData);
       console.log('Product updated successfully', response);
+      setIsError(false)
       navigate('/');  
     } catch (error) {
-      console.error('Error updating product:', error);
+      const errorResponse = error.response?.data || { detail: 'An error occurred' };
+      const errorMessage = Object.values(errorResponse)
+      .flat()
+      .join(', '); 
+
+      console.error('Error during registration:', errorMessage);
+      setErrors(errorMessage); 
+      setIsError(true); 
     }finally{
       setLoading(false)
     }
@@ -68,6 +101,9 @@ function EditProduct() {
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWvz4SoS1_MDfmm-HevR3Wgx2er-ZQNaKm_aGkYHdOgkLKJQXj2j0BlV4&s"
                   alt="olx logo" className="edit_img" />
               </div>
+              {
+                isError && <div className='error_box'>{errors}</div>
+              }
               <form onSubmit={handleSubmit} encType='multipart/form-data' className='edit_form'>
                   
                   <input 
@@ -118,7 +154,9 @@ function EditProduct() {
                   accept='.png, .jpg, .jpeg' 
                   className="edit_upload_img" 
                 />
-                <button type="submit" className='edit_button'>Update Product</button>
+                {
+                  !isError && <button type="submit" className='edit_button'>Update Product</button>
+                }
               </form>
           </div> )
         }

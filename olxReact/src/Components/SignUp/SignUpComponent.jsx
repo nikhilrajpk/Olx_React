@@ -3,10 +3,13 @@ import './SignUpComponent.css'
 import Arrow from '../Arrow/Arrow'
 import {registerUser} from '../../services/auth'
 import { useNavigate } from 'react-router-dom'
+import Loader from '../../utils/Loader/Loader'
 
 function SignUpComponent() {
   const [isError, setIsError] = useState(false)
   const [errors, setErrors] = useState('')
+
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -53,6 +56,7 @@ function SignUpComponent() {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try{
+      setLoading(true)
       const response = await registerUser(userDetail);
       setIsError(false)
       console.log('registered successfully', response.message)
@@ -66,13 +70,17 @@ function SignUpComponent() {
       console.error('Error during registration:', errorMessage);
       setErrors(errorMessage); 
       setIsError(true); 
+    }finally{
+      setLoading(false)
     }
   };
 
   return (
     <div className='signup_page'>
       <Arrow />
-        <div className="signup_div">
+      {
+        loading ? < Loader /> :(
+          <div className="signup_div">
             <div className="signup_logo">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWvz4SoS1_MDfmm-HevR3Wgx2er-ZQNaKm_aGkYHdOgkLKJQXj2j0BlV4&s"
                 alt="olx logo" className="signup_img" />
@@ -92,7 +100,9 @@ function SignUpComponent() {
                   !isError && <button onChange={handleChange} className='signup_button'>Register</button>
                 }
             </form>
-        </div>
+          </div>
+        )
+      }
     </div>
   )
 }
