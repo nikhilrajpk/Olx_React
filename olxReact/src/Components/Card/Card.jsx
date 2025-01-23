@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 function Card({prdct}) {
   const formattedDate = new Date(prdct?.created_at).toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: 'numeric',
     day: 'numeric',
   });
 

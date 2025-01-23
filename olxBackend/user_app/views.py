@@ -33,11 +33,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 # Product Serializer
 class ProductSerializer(serializers.ModelSerializer):
-    # user = UserSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
     class Meta:
         model = Products
         # fields = '__all__'
-        fields = ['product_name', 'price', 'category', 'description', 'product_image', 'user', 'id']
+        fields = ['product_name', 'price', 'category', 'description', 'product_image', 'user', 'id', 'created_at']
         read_only_fields = ['user']
     
     # def validate_price(self, value):
