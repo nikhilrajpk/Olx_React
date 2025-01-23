@@ -142,6 +142,50 @@ class AddProductView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
     
+class UpdateProductView(APIView):
+    parser_classes = [MultiPartParser, FormParser]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def put(self, request, pk, *args, **kwargs):
+        try:
+            # Retrieve the product
+            product = Products.objects.get(pk=pk, user=request.user)
+            
+            # Create a mutable copy of the request data
+            data = request.data.copy()
+            
+            # If no new image is provided, keep the existing image
+            if 'product_image' not in data or data['product_image'] == 'null':
+                data['product_image'] = product.product_image
+            
+            # Use partial=True to allow partial updates
+            serializer = ProductSerializer(product, data=data, partial=True)
+            
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            
+            logger.error(f"Serializer errors: {serializer.errors}")
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        except Products.DoesNotExist:
+            return Response(
+                {"error": "Product not found or you do not have permission to edit this product"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            logger.error(f"Error updating product: {str(e)}")
+            return Response(
+                {"error": "Failed to update product"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+    
+    
+    
+    
+    
+    
     
     # def post(self, request, *args, **kwargs):
     #     logger.debug(f"Authorization Header: {request.headers.get('Authorization')}")

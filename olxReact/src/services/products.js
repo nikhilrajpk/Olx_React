@@ -58,14 +58,20 @@ export const addProduct = async (formData) => {
     throw error;
   }
 
-  // console.log(token)
-  // if (!token) {
-  //   throw new Error('Authentication token is missing');
-  // }
+};
 
-  // const headers = {
-  //   'Authorization': `Bearer ${token}`,
-  // };
 
-    // return response.data;
+
+export const updateProduct = async (productId, formData) => {
+  try {
+    const response = await api.put(`api/users/edit-product/${productId}/`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating product:', error.response?.data || error);
+    throw error;
+  }
 };

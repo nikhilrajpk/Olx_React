@@ -30,7 +30,7 @@ function Header() {
 
         <input type="text"
          className="search_bar"
-         placeholder='Search'
+         placeholder='Search product name / category'
          value={searchTerm}
          onChange={(e)=>handleSearchChange(e.target.value)}
          />
