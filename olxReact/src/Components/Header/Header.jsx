@@ -18,7 +18,6 @@ function Header() {
     const handleLogout = () =>{
         logoutUser();
         handleIsLogged()
-        alert('Logged out!');
     }
 
   return (

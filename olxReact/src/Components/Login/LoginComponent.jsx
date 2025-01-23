@@ -6,6 +6,9 @@ import useUser from '../../Contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
 
 function LoginComponent() {
+  const [isError, setIsError] = useState(false)
+  const [errors, setErrors] = useState('')
+
   const navigate = useNavigate()
 
   const {handleUser} = useUser()
@@ -36,14 +39,21 @@ function LoginComponent() {
         localStorage.setItem('refresh', data.refresh);
         console.log('User details:', data.userDetails); // Log user details
         handleUser(data.userDetails);
+        setIsError(false)
         alert('Login successful');
         navigate('/');
       } else {
         throw new Error('Tokens missing in response');
       }
     }catch(error){
-      console.log('Login error:', error.response?.data || error.message);
-      alert(error.response?.data?.error || 'Invalid credentials');
+      const errorResponse = error.response?.data || { detail: 'An error occurred' };
+      const errorMessage = Object.values(errorResponse)
+      .flat()
+      .join(', '); 
+
+      console.error('Error during registration:', errorMessage);
+      setErrors(errorMessage + ' ' + 'Username or password is incorrect!'); 
+      setIsError(true); 
     }
   };
 
@@ -55,11 +65,14 @@ function LoginComponent() {
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWvz4SoS1_MDfmm-HevR3Wgx2er-ZQNaKm_aGkYHdOgkLKJQXj2j0BlV4&s"
                 alt="olx logo" className="login_img" />
             </div>
+            {
+              isError && <div className='error_box'>{errors}</div>
+            }
             <form onSubmit={handleSubmit} className='login_form'>
 
                 <input type="text" name='username' onChange={handleChange} id='username' placeholder='Username' className="login_field" required />
                 <input type="password" name='password' onChange={handleChange} id='pass' placeholder='Password' className="login_field" required />
-                
+          
                 <button className='login_button'>Login</button>
             </form>
         </div>
