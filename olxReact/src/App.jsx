@@ -61,13 +61,24 @@ function App() {
   }
 
   // productContext
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(()=>{
+    const saved_products = localStorage.getItem('all_products')
+    return saved_products ? JSON.parse(saved_products) : []
+  });
 
   const handleProducts = (data)=>{
     setProducts(data)
   };
 
-  const [singleProduct, setSingleProduct] = useState('')
+  // storing all products in the localstorage
+  useEffect(()=>{
+    localStorage.setItem('all_products', JSON.stringify(products))
+  },[products])
+
+  const [singleProduct, setSingleProduct] = useState(()=>{
+    const single_product = localStorage.getItem('single_product')
+    return single_product ? JSON.parse(single_product) : ''
+  })
   
   const handleSingleProduct = (prod)=>{
     setSingleProduct(prod)

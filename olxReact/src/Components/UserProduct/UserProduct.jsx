@@ -3,10 +3,10 @@ import Card from '../Card/Card'
 import './UserProduct.css'
 import { Link } from 'react-router-dom'
 
-function UserProduct() {
+function UserProduct({product}) {
   return (
     <div className='user_product_div'>
-        < Card />
+        < Card prdct={product} />
         < Link to={'/edit-product'} className='user_product_btn' >
           Edit
         </Link>
@@ -14,4 +14,4 @@ function UserProduct() {
   )
 }
 
-export default UserProduct
+export default React.memo(UserProduct)

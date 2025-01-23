@@ -14,31 +14,35 @@
 }
 .img{
     width: 40rem;
+    max-height: 25rem;
     object-fit: contain;
     background-repeat: no-repeat;
     border-radius: 5px;
 }
 .details_div{
     width: 25rem;
-    height: 21rem;
-    padding: 2rem;
+    height: 24rem;
+    padding: 1rem;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: rgb(223, 223, 241);
 }
 .prod_div{
     border: 1px solid blue;
     border-radius: 10px;
-    padding: 25px;
+    padding: 20px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     line-height: 1.9rem;
+    background-color: rgb(238, 241, 243)
 }
 .user_div{
     border: 1px solid blue;
     border-radius: 10px;
-    padding: 25px;
+    padding: 20px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     line-height: 1.9rem;
+    background-color: rgb(238, 241, 243)
 }
