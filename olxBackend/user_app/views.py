@@ -40,10 +40,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ['product_name', 'price', 'category', 'description', 'product_image', 'user', 'id', 'created_at']
         read_only_fields = ['user']
     
-    # def validate_price(self, value):
-    #     if value <= 0:
-    #         raise serializers.ValidationError("Price must be greater than zero")
-    #     return value
+    
         
     def validate_product_name(self, value):
         if not value.strip():
@@ -71,7 +68,7 @@ class LoginView(APIView):
         
         print(f"Username: {username}, Password: {password}")
         
-        # Check if the user exists
+        # Checking if the user exists
         user = get_user_model().objects.filter(username=username).first()
         if user:
             print(f"User found: {user.username}, Password correct: {user.check_password(password)}")
@@ -128,7 +125,7 @@ class AddProductView(APIView):
             
             serializer = ProductSerializer(data=data)
             if serializer.is_valid():
-                # Pass the user instance directly during save
+                
                 serializer.save(user=request.user)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             
@@ -152,14 +149,14 @@ class UpdateProductView(APIView):
             # Retrieve the product
             product = Products.objects.get(pk=pk, user=request.user)
             
-            # Create a mutable copy of the request data
+            # Creating a mutable copy of the request data
             data = request.data.copy()
             
             # If no new image is provided, keep the existing image
             if 'product_image' not in data or data['product_image'] == 'null':
                 data['product_image'] = product.product_image
             
-            # Use partial=True to allow partial updates
+            # partial=True to allow partial updates
             serializer = ProductSerializer(product, data=data, partial=True)
             
             if serializer.is_valid():
@@ -186,35 +183,3 @@ class UpdateProductView(APIView):
     
     
     
-    
-    # def post(self, request, *args, **kwargs):
-    #     logger.debug(f"Authorization Header: {request.headers.get('Authorization')}")
-    #     logger.debug(f"Request User: {request.user}")
-    #     logger.debug(f"Is Authenticated: {request.user.is_authenticated}")
-
-        
-    #     print(f"Request user: {request.user}")
-    #     print(f"Is authenticated: {request.user.is_authenticated}")
-        
-        
-    #     # if token:
-    #     #     # Manually check the token validity (to test if it's being parsed)
-    #     #     auth = JWTAuthentication()
-    #     #     try:
-    #     #         # Try to decode the token manually for debugging
-    #     #         user, _ = auth.authenticate(request)
-    #     #         print(f"Authenticated User: {user}")
-    #     #     except Exception as e:
-    #     #         print(f"Token authentication failed: {e}")
-    #     #         return Response({"detail": "Authentication credentials are invalid."}, status=status.HTTP_401_UNAUTHORIZED)
-    #     # else:
-    #     #     return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
-        
-    #     data = request.data
-    #     serializer = ProductSerializer(data=data)
-
-    #     if serializer.is_valid():
-    #         serializer.save(user=request.user)
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
